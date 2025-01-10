@@ -20,8 +20,8 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: "http://localhost:8080/auth/google/success",
-    failureRedirect: "http://localhost:8080/auth/google/failed",
+    successRedirect: "/auth/google/success",
+    failureRedirect: "/auth/google/failed",
   })
 );
 router.get("/google/success", googleAuth);
@@ -29,7 +29,7 @@ router.get("/google/failed", (req, res) => {
   req.logOut(() => {
     res.clearCookie("connect.sid");
   });
-  res.redirect("http://localhost:3000/");
+  res.redirect("https://exclusive-mo0j.onrender.com/");
 });
 // );
 router.post('/login',loginValidation,passport_local.authenticate("local", { session: false }),loginToAccount)
