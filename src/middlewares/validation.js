@@ -131,9 +131,7 @@ module.exports = {
           .min(8)
           .regex(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/)
           .allow(),
-        phoneNumber: Joi.string()
-          .regex(/^(\+84)|0([358]\d{8,8}|9\d{7,8})$/)
-          .message("Số điện thoại không hợp lệ"),
+        phoneNumber: Joi.string().regex(/^(\+84)|0([358]\d{8,8}|9\d{7,8})$/),
         gender: Joi.allow(),
         birthDay: Joi.date().format("DD-MM-YYYY"),
       });
@@ -187,10 +185,10 @@ module.exports = {
           .regex(
             /^([a-zA-zàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸ\s]{2,100})\s{0,1}([a-zA-zàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]{0,6})$/i
           )
-          .required().message("Tên không hợp lệ"),
+          .required(),
         phoneNumber: Joi.string()
           .regex(/^(\+84)|0([358]\d{8,8}|9\d{7,8})$/)
-          .required().message("Số điện thoại không hợp lệ"),
+          .required(),
         address: Joi.string().required(),
         email: Joi.allow(),
         payment_method: Joi.string(),
