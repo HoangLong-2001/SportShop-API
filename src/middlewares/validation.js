@@ -7,15 +7,17 @@ module.exports = {
         email: Joi.string().email().required(),
         password: Joi.string()
           .regex(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/)
-          .required().message({'string.regex':'Mật khẩu không hợp lệ (Mật khẩu phải chứa ít nhất 8 ký tư và tối đa 16 ký tự)'}),
+          .required(),
         type: Joi.allow(),
         role: Joi.allow(),
       });
-      const { error } = customerSchema.validate(req.body,{ abortEarly: false });
+      const { error } = customerSchema.validate(req.body, {
+        abortEarly: false,
+      });
       console.log(error);
 
       if (error) {
-        throw createError.BadRequest(error.message);
+        throw createError.BadRequest('Email hoặc mật khẩu không chính xác');
       }
       return next();
     } catch (err) {
@@ -43,7 +45,7 @@ module.exports = {
       const { error } = customerSchema.validate(req.body);
       if (error) {
         console.log(error);
-        throw createError.BadRequest("Name, Password or email is invalid");
+        throw createError.BadRequest("Tên, Mật khẩu hoặc email không đúng định dạng ");
       }
       return next();
     } catch (err) {
@@ -187,10 +189,12 @@ module.exports = {
           .regex(
             /^([a-zA-zàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸ\s]{2,100})\s{0,1}([a-zA-zàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]{0,6})$/i
           )
-          .required().message("Tên không hợp lệ"),
+          .required()
+          .message("Tên không hợp lệ"),
         phoneNumber: Joi.string()
           .regex(/^(\+84)|0([358]\d{8,8}|9\d{7,8})$/)
-          .required().message("Số điện thoại không hợp lệ"),
+          .required()
+          .message("Số điện thoại không hợp lệ"),
         address: Joi.string().required(),
         email: Joi.allow(),
         payment_method: Joi.string(),
