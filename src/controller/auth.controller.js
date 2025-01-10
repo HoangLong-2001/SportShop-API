@@ -108,7 +108,7 @@ module.exports = {
     } catch (err) {
       console.log(err);
 
-      res.redirect("https://sportshop-api.onrender.com/auth/google/failed");
+      res.redirect("http://localhost:8080/auth/google/failed");
       next(err);
     }
   },
