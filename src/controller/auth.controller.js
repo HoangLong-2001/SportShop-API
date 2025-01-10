@@ -104,11 +104,11 @@ module.exports = {
         maxAge: 10 * 60 * 1000,
         secure: true,
       });
-      res.redirect("http://localhost:3000");
+      res.redirect("https://exclusive-mo0j.onrender.com");
     } catch (err) {
       console.log(err);
 
-      res.redirect("http://localhost:8080/auth/google/failed");
+      res.redirect("https://sportshop-api.onrender.com/auth/google/failed");
       next(err);
     }
   },
