@@ -7,11 +7,11 @@ module.exports = {
         email: Joi.string().email().required(),
         password: Joi.string()
           .regex(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/)
-          .required().message('Mật khẩu đăng nhập không hợp lệ. Vui lòng nhập lại'),
+          .required().message({'string.regex':'Mật khẩu không hợp lệ (Mật khẩu phải chứa ít nhất 8 ký tư và tối đa 16 ký tự)'}),
         type: Joi.allow(),
         role: Joi.allow(),
       });
-      const { error } = customerSchema.validate(req.body);
+      const { error } = customerSchema.validate(req.body,{ abortEarly: false });
       console.log(error);
 
       if (error) {
